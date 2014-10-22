@@ -8,6 +8,6 @@ Implements the [inode pointer structure](http://en.wikipedia.org/wiki/Inode_poin
 ![readme][2]
 ![readme][3]
 
-[1]: https://raw.githubusercontent.com/nastajus/CPS801_OS_project_part2/Ext2-inode.gif
-[2]: https://raw.githubusercontent.com/nastajus/CPS801_OS_project_part2/README.png
-[3]: https://raw.githubusercontent.com/nastajus/CPS801_OS_project_part2/README_UML.png
+[1]: https://raw.githubusercontent.com/nastajus/CPS801_OS_project_part2/master/Ext2-inode.gif
+[2]: https://raw.githubusercontent.com/nastajus/CPS801_OS_project_part2/master/README.png
+[3]: https://raw.githubusercontent.com/nastajus/CPS801_OS_project_part2/master/README_UML.png
