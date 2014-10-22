@@ -15,7 +15,7 @@ This follows the UNIX V7 system as closely as possible. Specifically it is imple
 
 Blocks
 
-Block # 0		1		2		3		4		13		14		15		16		17
+Block # 0               1       2       3       4       13      14      15      16      17
 		+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
 		| root  | inode | dir   | dir   |       | dir   |pointer| indir | indir | inode |
 		| dir   |       | block | block | ...   | block | block | block | block |       |
@@ -36,7 +36,7 @@ Block # 0		1		2		3		4		13		14		15		16		17
 	+----+---------+
 	
 *2 inode - first twelve entries limited to direct blocks. thirteenth entry limited to pointer block. fourteenth and fifteenth not used in this assignment to doubly and triply indirect pointer blocks. this has enough capacity to point to 128 entries by itself. together with the preceeding 12 blocks, a totoal 140 blocks is possible to be represented for a single file. This goes well beyond the 40 block limit of the assignment
-	#2	-	all direct blocks holds raw datum only
+	#2 - all direct blocks holds raw datum only
 	#3
 	...
 	#13 
