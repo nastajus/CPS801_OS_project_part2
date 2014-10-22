@@ -1,0 +1,53 @@
+CPS801
+Ian Nastajus
+020921847
+
+part 2 b
+
+question
+========
+B) Explain the data structure/s that you have used in your program for each file allocation method.  Also for each allocation method suggest a directory implementation, which is the extension of each directory entry of filelist.txt  from part1 that includes storage information for each file allocation method. To do that show a diagram for each directory entry for the used file allocation method and any additional  structure/s that is required to be stored on file/s (disk) to be able to load the current information of directory and files of your  file system.  (2 marks) 
+
+Answer
+======
+This follows the UNIX V7 system as closely as possible. Specifically it is implementing the inode pointer structure following it's associated rules in a linked list. Since the project doesn't state it must be an array for contiguous allocation, the intention was to reuse the same code of linked lists with a few simple rule changes to make it apply a resulting 200 KB disk in that order, such that the various reads and writes would be applied in that order.
+
+
+Blocks
+
+Block # 0		1		2		3		4		13		14		15		16		17
+		+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+		| root  | inode | dir   | dir   |       | dir   |pointer| indir | indir | inode |
+		| dir   |       | block | block | ...   | block | block | block | block |       |
+		|       | *2-13 |       |       |       |       |       |       |       | *18   |
+		| *0:#1 | *     | datum | datum |       | datum | *3    | datum | datum | *19   |
+		| *1:#17|       |       |       |       |       |       |       |       |       |
+		+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+		
+				>>>>>>>>>>>>>              foo.txt                   <<<<<<<<<<< 
+		
+*0 root dir block - entries to files, with just inode # and filename. root dir is represented as a block.
+	+----+---------+
+	| #1 | foo.txt |
+	+----+---------+
+*1 
+	+----+---------+
+	| #2 | bar.txt |
+	+----+---------+
+	
+*2 inode - first twelve entries limited to direct blocks. thirteenth entry limited to pointer block. fourteenth and fifteenth not used in this assignment to doubly and triply indirect pointer blocks. this has enough capacity to point to 128 entries by itself. together with the preceeding 12 blocks, a totoal 140 blocks is possible to be represented for a single file. This goes well beyond the 40 block limit of the assignment
+	#2	-	all direct blocks holds raw datum only
+	#3
+	...
+	#13 
+	#14 - points to poitner block
+	
+the knowledge of the blocks meanings is kept outside of the direct/indirect blocks themselves, instead it is hardcoded in the representational POSITION of their entries in the inode pointer strucutre, and subsequently in the positions of all pointed data from the pointer block.
+	
+*3 pointer block
+	#15 - all indirect blocks hold raw datum only as well.
+	#16
+	
+Please note, a file smaller
+
+every new file is represented in the root dir block. this only has the file name and the inode #. The remaining inode/direct/indirect blocks and pointer block do not contain the filename. 
